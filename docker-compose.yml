@@ -20,6 +20,7 @@ services:
     container_name: kafka
     volumes:
       - "$PWD/kafka:/etc/kafka"
+      - ./scripts:/scripts
     ports:
       - 9092:9092
     environment:
@@ -74,20 +75,30 @@ services:
       CONNECT_PLUGIN_PATH: '/usr/share/java'
     volumes:
      - ./scripts:/scripts
+     - ./jars:/etc/kafka-connect/jars
 
   schema-registry:
+    container_name: schema-registry
     image: confluentinc/cp-schema-registry:${CONFLUENT_VERSION}
     depends_on:
       - zookeeper
       - kafka
+    ports:
+      - 8081:8081
+    volumes:
+      - ./scripts:/scripts
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: zookeeper:2181
 
   db:
-    image: mysql:8.0.21
+    image: debezium/example-mysql:0.8
     container_name: db
     ports:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: confluent
+      MYSQL_USER: mysqluser
+      MYSQL_PASSWORD: mysqlpw
+    volumes:
+     - ./data/customers.sql:/docker-entrypoint-initdb.d/z99_dump.sql
