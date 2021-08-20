@@ -110,4 +110,4 @@ services:
       MYSQL_USER: mysqluser
       MYSQL_PASSWORD: mysqlpw
     volumes:
-     - ./data/customers.sql:/docker-entrypoint-initdb.d/z99_dump.sql
+     - ./data/db.sql:/docker-entrypoint-initdb.d/z99_dump.sql

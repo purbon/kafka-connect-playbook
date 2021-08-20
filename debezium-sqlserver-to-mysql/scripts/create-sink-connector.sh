@@ -9,17 +9,30 @@ curl -i -X POST -H "Accept:application/json" \
       "config": {
         "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
         "tasks.max": "2",
-        "topics": "server1.dbo.customers",
+        "topics.regex": "server1\\.dbo\\.(.*)",
         "connection.url": " jdbc:mysql://db:3306",
         "dialect.name" : "MySqlDatabaseDialect",
         "connection.user": "root",
         "connection.password": "confluent",
-        "table.name.format": "demo.${topic}",
         "insert.mode": "upsert",
-        "auto.create": "true",
-        "auto.evolve": "true",
+        "auto.create": "false",
+        "auto.evolve": "false",
         "pk.mode": "record_key",
         "pk.fields": "id",
-        "delete.enabled": "true"
+        "delete.enabled": "true",
+        "table.name.format": "demo.${topic}",
+        "transforms":"dropPrefix",
+        "transforms.dropPrefix.type":"org.apache.kafka.connect.transforms.RegexRouter",
+        "transforms.dropPrefix.regex":"server1.dbo.(.*)",
+        "transforms.dropPrefix.replacement":"$1"
       }
     }'
+
+    #
+
+
+
+#    "transforms":"dropPrefix",
+#    "transforms.dropPrefix.type":"org.apache.kafka.connect.transforms.RegexRouter",
+#    "transforms.dropPrefix.regex":"server1.dbo.(.*)",
+#    "transforms.dropPrefix.replacement":"demo.$1"
