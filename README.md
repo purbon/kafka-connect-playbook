@@ -1,6 +1,10 @@
 # A collection of Kafka Connect Playbooks and use cases
 
-TBA
+Available playbooks:
+
+* SQL Server Debezium CDC Source connector
+* JDBC Sink connector into MySQL
+* Debezium CDC -> Kafka -> JDBC Sink -> MySQL
 
 ## Author
 
