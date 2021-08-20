@@ -34,6 +34,7 @@ INSERT INTO cities(name,country) VALUES ('Barcelona', 'Spain');
 INSERT INTO cities(name,country) VALUES ('Girona', 'Spain');
 
 
+CREATE TABLE debezium_signal (id VARCHAR(42) PRIMARY KEY, type VARCHAR(32) NOT NULL, data VARCHAR(2048) NULL);
 
 EXEC sys.sp_cdc_enable_table @source_schema = 'dbo', @source_name = 'customers', @role_name = NULL, @supports_net_changes = 0;
 EXEC sys.sp_cdc_enable_table @source_schema = 'dbo', @source_name = 'cities', @role_name = NULL, @supports_net_changes = 0;

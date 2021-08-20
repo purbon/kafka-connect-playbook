@@ -14,6 +14,7 @@ curl -X PUT \
                     "database.dbname" : "testDB",
                     "database.history.kafka.bootstrap.servers": "broker:9092",
                     "database.history.kafka.topic": "schema-changes.inventory",
+                    "table.include.list" : "dbo\\.(.*)",
                     "transforms": "InsertField,unwrap",
                     "transforms.InsertField.type": "org.apache.kafka.connect.transforms.InsertField$Value",
                     "transforms.InsertField.static.field": "MessageSource",
