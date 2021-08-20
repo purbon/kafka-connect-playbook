@@ -11,15 +11,14 @@ create table customers (
         id INT PRIMARY KEY,
         first_name VARCHAR(255),
         last_name VARCHAR(255),
-        email VARCHAR(255),
-        __op VARCHAR(50),
-        __deleted VARCHAR(50)
+        email VARCHAR(255)
 );
 
 create table cities (
         id INT PRIMARY KEY,
         name VARCHAR(255),
-        country VARCHAR(255),
-        __op VARCHAR(50),
-        __deleted VARCHAR(50)
+        country VARCHAR(255)
 );
+
+# __op VARCHAR(50),
+# __deleted VARCHAR(50)

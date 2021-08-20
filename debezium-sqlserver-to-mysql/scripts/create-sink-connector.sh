@@ -21,16 +21,14 @@ curl -i -X POST -H "Accept:application/json" \
         "pk.fields": "id",
         "delete.enabled": "true",
         "table.name.format": "demo.${topic}",
-        "transforms":"dropPrefix",
+        "transforms":"ReplaceField,dropPrefix",
+        "transforms.ReplaceField.type": "org.apache.kafka.connect.transforms.ReplaceField$Value",
+        "transforms.ReplaceField.blacklist": "__op,__deleted",
         "transforms.dropPrefix.type":"org.apache.kafka.connect.transforms.RegexRouter",
         "transforms.dropPrefix.regex":"server1.dbo.(.*)",
         "transforms.dropPrefix.replacement":"$1"
       }
     }'
-
-    #
-
-
 
 #    "transforms":"dropPrefix",
 #    "transforms.dropPrefix.type":"org.apache.kafka.connect.transforms.RegexRouter",
