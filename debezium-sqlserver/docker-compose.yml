@@ -52,8 +52,10 @@ services:
       CONFLUENT_TELEMETRY_ENABLED: 'false'
 
   kafka-connect:
-    image: kafka-connect/kafka-connect:latest
-    build: kafka-connect/
+  #  image: kafka-connect/kafka-connect:latest
+    build:
+      context: kafka-connect/
+      dockerfile: Dockerfile
     container_name: kafka-connect
     depends_on:
       - zookeeper
