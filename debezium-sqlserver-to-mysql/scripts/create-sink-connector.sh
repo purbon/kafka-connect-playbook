@@ -11,7 +11,7 @@ curl -i -X POST -H "Accept:application/json" \
         "tasks.max": "2",
         "topics.regex": "server1\\.dbo\\.(.*)",
         "connection.url": " jdbc:mysql://db:3306",
-        "dialect.name" : "MySqlDatabaseDialect",
+        "dialect.name" : "CustomMySqlJdbcDialect",
         "connection.user": "root",
         "connection.password": "confluent",
         "insert.mode": "upsert",

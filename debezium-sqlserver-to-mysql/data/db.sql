@@ -11,13 +11,16 @@ create table customers (
         id INT PRIMARY KEY,
         first_name VARCHAR(255),
         last_name VARCHAR(255),
-        email VARCHAR(255)
+        email VARCHAR(255),
+        created_at DATETIME(3)
 );
 
 create table cities (
         id INT PRIMARY KEY,
         name VARCHAR(255),
-        country VARCHAR(255)
+        country VARCHAR(255),
+        created_at DATETIME(3)
+
 );
 
 # __op VARCHAR(50),

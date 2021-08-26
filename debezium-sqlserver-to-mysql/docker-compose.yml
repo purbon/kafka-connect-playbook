@@ -66,7 +66,7 @@ services:
       - 18083:18083
     environment:
       CUB_CLASSPATH: '/usr/share/java/confluent-security/connect/*:/usr/share/java/kafka/*:/usr/share/java/cp-base-new/*'
-      CLASSPATH: "/usr/share/java/kafka-connect-replicator/*:/usr/share/java/monitoring-interceptors/*"
+      CLASSPATH: "/usr/share/java/kafka-connect-replicator/*:/usr/share/java/monitoring-interceptors/*:/usr/share/confluent-hub-components/confluentinc-kafka-connect-jdbc/jars/*"
       CONNECT_BOOTSTRAP_SERVERS: "broker:9092"
       CONNECT_REST_ADVERTISED_HOST_NAME: "connect"
       CONNECT_REST_PORT: 18083
@@ -78,7 +78,7 @@ services:
       CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
       CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
       CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
-      CONNECT_LOG4J_ROOT_LOGLEVEL: "INFO"
+      CONNECT_LOG4J_ROOT_LOGLEVEL: "DEBUG"
       CONNECT_LOG4J_LOGGERS: "org.apache.kafka.connect.runtime.rest=WARN,org.reflections=ERROR"
       CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: "1"
       CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: "1"
@@ -88,13 +88,15 @@ services:
     volumes:
        - $PWD/scripts:/scripts
        - $PWD/connect-plugins:/usr/share/confluent-hub-components
-       - $PWD/jars:/usr/share/confluent-hub-components/confluentinc-kafka-connect-jdbc/jars/
+       - $PWD/jars:/usr/share/confluent-hub-components/confluentinc-kafka-connect-jdbc/jars
 
   schema-registry:
     image: confluentinc/cp-schema-registry:${TAG}
     depends_on:
       - zookeeper
       - broker
+    ports:
+      - 8081:8081
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: zookeeper:2181
