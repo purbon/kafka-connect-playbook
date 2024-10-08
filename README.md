@@ -6,6 +6,8 @@ Available playbooks:
 * JDBC Sink connector into MySQL
 * Debezium CDC -> Kafka -> JDBC Sink -> MySQL
 
+TEST
+
 ## Author
 
 Pere Urbon-Bayes
